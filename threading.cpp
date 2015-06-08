@@ -3,9 +3,9 @@
 #include <thread>
 #include <chrono>
 
-void task(std::chrono::high_resolution_clock::time_point start, std::string tag, std::string message) {
+void task(std::chrono::high_resolution_clock::time_point start, std::string tag) {
     for(int i = 0; i < 10; i++) {
-        LogFile::log(start, tag, message);
+        LogFile::log(start, tag, i + 1);
     }
 }
 
@@ -13,5 +13,27 @@ int main(int argc, char *argv[]) {
 
     std::chrono::high_resolution_clock::time_point program_start;
     program_start = LogFile::startLog();
+
+    thread t1(task, program_start, "A");
+    thread t2(task, program_start, "B");
+    thread t3(task, program_start, "C");
+    thread t4(task, program_start, "D");
+    thread t5(task, program_start, "E");
+    thread t6(task, program_start, "F");
+    thread t7(task, program_start, "G");
+    thread t8(task, program_start, "H");
+    thread t9(task, program_start, "I");
+    thread t10(task, program_start, "J");
+
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
+    t6.join();
+    t7.join();
+    t8.join();
+    t9.join();
+    t10.join();
 
 }
