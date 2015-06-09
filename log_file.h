@@ -17,11 +17,11 @@ namespace LogFile {
 	std::stringstream line;
 	std::string log_string;
 
-	static void log(std::string tag, std::string message);
+	void log(std::string tag, std::string message);
 	
-	static void error(std::string tag, std::string message); 
+	void error(std::string tag, std::string message); 
 	
-	static std::chrono::high_resolution_clock::time_point startLog();
+	std::chrono::high_resolution_clock::time_point startLog();
 
 }
 
