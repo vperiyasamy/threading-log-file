@@ -19,6 +19,11 @@
 // private:
 // };
 
+bool displayFlag;
+std::ofstream log_file;
+std::stringstream line;
+std::string log_string;
+
 std::chrono::high_resolution_clock::time_point LogFile::startLog() {
 	std::chrono::high_resolution_clock::time_point program_start; //start accurate to microsecond
 	std::chrono::system_clock::time_point start_time; // start used to print time stamp
