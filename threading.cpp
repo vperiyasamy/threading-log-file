@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 
     std::chrono::high_resolution_clock::time_point program_start;
     program_start = LogFile::startLog();
+    LogFile::displayFlag = true;
 
     std::thread t1(task, program_start, "A");
     std::thread t2(task, program_start, "B");
