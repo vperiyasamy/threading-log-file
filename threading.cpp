@@ -5,7 +5,7 @@
 
 void task(std::chrono::high_resolution_clock::time_point start, std::string tag) {
     for(int i = 0; i < 10; i++) {
-        LogFile::log(start, tag, i + 1);
+        LogFile::log(start, tag, std::to_string(i + 1));
     }
 }
 
