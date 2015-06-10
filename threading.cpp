@@ -13,7 +13,8 @@ int main(int argc, char *argv[]) {
     // program_start = LogFile::startLog();
 
     // pass boolean to decide whether to display to cout also
-    LogFile::startLog(true);
+    bool displayOn = true;
+    LogFile::startLog(displayOn);
 
     std::thread t1(task, "A");
     std::thread t2(task, "B");

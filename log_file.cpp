@@ -46,7 +46,7 @@ void LogFile::startLog(bool displayOn) {
 	log_file << log_string;
 }
 
-LogFile::log(std::string tag, std::string message) {
+void LogFile::log(std::string tag, std::string message) {
 	std::chrono::high_resolution_clock::time_point current;
 	current = std::chrono::high_resolution_clock::now();
 
@@ -65,7 +65,7 @@ LogFile::log(std::string tag, std::string message) {
 	//std::time_t now_c = std::chrono::system_clock::to_time_t(time_point);
 }
 
-LogFile::error(std::string tag, std::string message) {
+void LogFile::error(std::string tag, std::string message) {
 	std::chrono::high_resolution_clock::time_point current;
 	current = std::chrono::high_resolution_clock::now();
 

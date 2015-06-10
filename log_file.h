@@ -19,9 +19,9 @@ public:
 	std::string log_string;
 	std::chrono::high_resolution_clock::time_point program_start;
 
-	void log(std::chrono::high_resolution_clock::time_point program_start, std::string tag, std::string message);
+	void log(std::string tag, std::string message);
 	
-	void error(std::chrono::high_resolution_clock::time_point program_start, std::string tag, std::string message); 
+	void error(std::string tag, std::string message); 
 	
 	void startLog(bool displayOn);
 
