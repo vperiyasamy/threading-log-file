@@ -19,12 +19,12 @@ public:
 	static std::string log_string;
 	static std::chrono::high_resolution_clock::time_point program_start;
 
-	void log(std::string tag, std::string message);
+	static void log(std::string tag, std::string message);
 	
-	void error(std::string tag, std::string message); 
+	static void error(std::string tag, std::string message); 
 	
 	// LogFile(bool displayOn);
-	void startLog(bool displayOn);
+	static void startLog(bool displayOn);
 
 private:
 	static bool displayFlag;
