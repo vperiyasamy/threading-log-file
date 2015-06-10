@@ -19,11 +19,11 @@
 // private:
 // };
 
-bool displayFlag = false;
-std::ofstream log_file;
-std::stringstream line;
-std::string log_string;
-std::chrono::high_resolution_clock::time_point program_start;
+bool LogFile::displayFlag = false;
+std::ofstream LogFile::log_file;
+std::stringstream LogFile::line;
+std::string LogFile::log_string;
+std::chrono::high_resolution_clock::time_point LogFile::program_start;
 
 //LogFile::LogFile(bool displayOn) {
 void LogFile::startLog(bool displayOn) {
