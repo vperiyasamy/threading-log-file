@@ -23,7 +23,7 @@ public:
 	
 	void error(std::chrono::high_resolution_clock::time_point program_start, std::string tag, std::string message); 
 	
-	void startLog();
+	void startLog(bool displayOn);
 
 private:
 	bool displayFlag;

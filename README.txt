@@ -1,0 +1,1 @@
+compile with: g++-4.9 -Wall -pedantic -std=c++0x -pthread -o threading threading.cpp
