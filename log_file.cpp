@@ -25,7 +25,7 @@
 // std::string log_string;
 // std::chrono::high_resolution_clock::time_point program_start;
 
-void LogFile::startLog(bool displayOn) {
+static void LogFile::startLog(bool displayOn) {
 	//std::chrono::high_resolution_clock::time_point program_start; //start accurate to microsecond
 	std::chrono::system_clock::time_point start_time; // start used to print time stamp
 	time_t tt; // used to print ctime stamp
@@ -46,7 +46,7 @@ void LogFile::startLog(bool displayOn) {
 	log_file << log_string;
 }
 
-void LogFile::log(std::string tag, std::string message) {
+static void LogFile::log(std::string tag, std::string message) {
 	std::chrono::high_resolution_clock::time_point current;
 	current = std::chrono::high_resolution_clock::now();
 
@@ -65,7 +65,7 @@ void LogFile::log(std::string tag, std::string message) {
 	//std::time_t now_c = std::chrono::system_clock::to_time_t(time_point);
 }
 
-void LogFile::error(std::string tag, std::string message) {
+static void LogFile::error(std::string tag, std::string message) {
 	std::chrono::high_resolution_clock::time_point current;
 	current = std::chrono::high_resolution_clock::now();
 
