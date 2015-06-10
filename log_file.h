@@ -11,22 +11,25 @@
 #include <string>
 #include <ctime>
 
-class LogFile {
-public:
+
+namespace LogFile {
+// class LogFile {
+// public:
 	//bool displayFlag;
 	std::ofstream log_file;
 	std::stringstream line;
 	std::string log_string;
 	std::chrono::high_resolution_clock::time_point program_start;
 
-	static void log(std::string tag, std::string message);
+	void log(std::string tag, std::string message);
 	
-	static void error(std::string tag, std::string message); 
+	void error(std::string tag, std::string message); 
 	
-	static void startLog(bool displayOn);
+	void startLog(bool displayOn);
 
-private:
+// private:
 	bool displayFlag;
-};
+// };
+}
 
 #endif /* LogFile_H */

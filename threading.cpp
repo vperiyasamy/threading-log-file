@@ -12,9 +12,7 @@ int main(int argc, char *argv[]) {
     // std::chrono::high_resolution_clock::time_point program_start;
     // program_start = LogFile::startLog();
 
-    // pass boolean to decide whether to display to cout also
-    bool displayOn = true;
-    LogFile::startLog(displayOn);
+    LogFile::startLog(true);
 
     std::thread t1(task, "A");
     std::thread t2(task, "B");
