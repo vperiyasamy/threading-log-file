@@ -11,11 +11,9 @@
 #include <string>
 #include <ctime>
 
-
-namespace LogFile {
-// class LogFile {
-// public:
-	//bool displayFlag;
+class LogFile {
+public:
+	// bool displayFlag;
 	std::ofstream log_file;
 	std::stringstream line;
 	std::string log_string;
@@ -27,9 +25,8 @@ namespace LogFile {
 	
 	void startLog(bool displayOn);
 
-// private:
+private:
 	bool displayFlag;
-// };
-}
+};
 
 #endif /* LogFile_H */
