@@ -1,6 +1,6 @@
 
-#ifndef LogFile_H_
-#define LogFile_H_
+#ifndef LogFile_H
+#define LogFile_H
 
 
 #include <iostream>
@@ -11,19 +11,22 @@
 #include <string>
 #include <ctime>
 
-namespace LogFile {
-
-	bool displayFlag;
+class LogFile {
+public:
+	//bool displayFlag;
 	std::ofstream log_file;
 	std::stringstream line;
 	std::string log_string;
+	std::chrono::high_resolution_clock::time_point program_start;
 
-	void log(std::string tag, std::string message);
+	void log(std::chrono::high_resolution_clock::time_point program_start, std::string tag, std::string message);
 	
-	void error(std::string tag, std::string message); 
+	void error(std::chrono::high_resolution_clock::time_point program_start, std::string tag, std::string message); 
 	
-	std::chrono::high_resolution_clock::time_point startLog();
+	void startLog();
 
-}
+private:
+	bool displayFlag;
+};
 
-#endif /* LogFile_H_ */
+#endif /* LogFile_H */
