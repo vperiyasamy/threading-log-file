@@ -14,10 +14,10 @@
 class LogFile {
 public:
 	// bool displayFlag;
-	std::ofstream log_file;
-	std::stringstream line;
-	std::string log_string;
-	std::chrono::high_resolution_clock::time_point program_start;
+	static std::ofstream log_file;
+	static std::stringstream line;
+	static std::string log_string;
+	static std::chrono::high_resolution_clock::time_point program_start;
 
 	void log(std::string tag, std::string message);
 	
@@ -27,7 +27,7 @@ public:
 	//void startLog(bool displayOn);
 
 private:
-	bool displayFlag;
+	static bool displayFlag;
 };
 
 #endif /* LogFile_H */

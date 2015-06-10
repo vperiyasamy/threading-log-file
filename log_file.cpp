@@ -19,14 +19,14 @@
 // private:
 // };
 
-// bool displayFlag;
-// std::ofstream log_file;
-// std::stringstream line;
-// std::string log_string;
-// std::chrono::high_resolution_clock::time_point program_start;
+bool displayFlag = false;
+std::ofstream log_file;
+std::stringstream line;
+std::string log_string;
+std::chrono::high_resolution_clock::time_point program_start;
 
-LogFile::LogFile(bool displayOn) {
-// void LogFile::startLog(bool displayOn) {
+//LogFile::LogFile(bool displayOn) {
+void LogFile::startLog(bool displayOn) {
 	//std::chrono::high_resolution_clock::time_point program_start; //start accurate to microsecond
 	std::chrono::system_clock::time_point start_time; // start used to print time stamp
 	time_t tt; // used to print ctime stamp
@@ -43,8 +43,14 @@ LogFile::LogFile(bool displayOn) {
 	line << "Program started: " << date_stamp << "\n";
 	log_string = line.str();
 
+	// add display capability here
 	log_file.open("log.txt", std::ios_base::app);
 	log_file << log_string;
+
+	if(displayFlag) {
+		std::cout << log_string;
+		std::flush(std::cout);
+	}
 }
 
 void LogFile::log(std::string tag, std::string message) {
