@@ -23,7 +23,8 @@ public:
 	
 	void error(std::string tag, std::string message); 
 	
-	void startLog(bool displayOn);
+	LogFile(bool displayOn);
+	//void startLog(bool displayOn);
 
 private:
 	bool displayFlag;

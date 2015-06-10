@@ -2,7 +2,7 @@
 #include <thread>
 
 
-LogFile logfile;
+LogFile logfile(true);
 
 void task(std::string tag) {
     for(int i = 0; i < 10; i++) {
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     // program_start = LogFile::startLog();
 
     //LogFile::startLog(true);
-    logfile.startLog(true);
+    //logfile.startLog(true);
 
     std::thread t1(task, "A");
     std::thread t2(task, "B");
