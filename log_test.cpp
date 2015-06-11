@@ -11,7 +11,7 @@ void task(std::string tag) {
 
 int main(int argc, char *argv[]) {
 
-    LogFile::startLog(false);
+    LogFile::startLog(true);
 
     std::thread t1(task, "A");
     std::thread t2(task, "B");
