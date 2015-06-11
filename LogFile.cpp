@@ -1,33 +1,17 @@
-// #include <iostream>
-// #include <fstream>
-// #include <chrono>
-// #include <thread>
-// #include <string>
-// #include <ctime>
+// LogFile.cpp
+
 #include "log_file.h"
 
-// class LogFile {
-// public:
-// 	bool displayFlag;
-// 	std::ofstream log_file;
-// 	std::stringstream line;
-// 	std::string log_string;
-// 	static void log(std::string tag, std::string message);
-// 	static void error(std::string tag, std::string message); 
-// 	static std::chrono::high_resolution_clock::time_point startLog();
+bool LogFile::displayFlag = false; // to determine if we should print to cout
+std::fstream LogFile::log_file; // file object to open log.txt
+std::stringstream LogFile::line; // string stream to capture info
+std::string LogFile::log_string; // to be written to file/cout
+std::chrono::high_resolution_clock::time_point LogFile::program_start; //used as reference for microsecond execution
+std::mutex mutex_lock; // to prevent multithreading file i/o error
 
-// private:
-// };
-
-bool LogFile::displayFlag = false;
-std::ofstream LogFile::log_file;
-std::stringstream LogFile::line;
-std::string LogFile::log_string;
-std::chrono::high_resolution_clock::time_point LogFile::program_start;
-
-//LogFile::LogFile(bool displayOn) {
+// This method only called once to set up logging
 void LogFile::startLog(bool displayOn) {
-	//std::chrono::high_resolution_clock::time_point program_start; //start accurate to microsecond
+
 	std::chrono::system_clock::time_point start_time; // start used to print time stamp
 	time_t tt; // used to print ctime stamp
 
@@ -43,9 +27,9 @@ void LogFile::startLog(bool displayOn) {
 	line << "Program started: " << date_stamp << "\n";
 	log_string = line.str();
 
-	// add display capability here
 	log_file.open("log.txt", std::ios_base::app);
 	log_file << log_string;
+	log_file.close();
 
 	if(displayFlag) {
 		std::cout << log_string;
@@ -54,6 +38,7 @@ void LogFile::startLog(bool displayOn) {
 }
 
 void LogFile::log(std::string tag, std::string message) {
+
 	std::chrono::high_resolution_clock::time_point current;
 	current = std::chrono::high_resolution_clock::now();
 
@@ -62,17 +47,23 @@ void LogFile::log(std::string tag, std::string message) {
 	line << "LOG; " << "+" << duration << " microseconds; " << tag << "; " << message << ";\n";
 	log_string = line.str();
 
+	mutex_lock.lock(); // lock mutex to prevent other threads from messing with file
+
 	log_file.open("log.txt", std::ios_base::app);
 	log_file << log_string;
+	log_file.close();
 
 	if(displayFlag) {
 		std::cout << log_string;
 		std::flush(std::cout);
 	}
-	//std::time_t now_c = std::chrono::system_clock::to_time_t(time_point);
+
+	mutex_lock.unlock();
 }
 
+// same as log, but will print error instead
 void LogFile::error(std::string tag, std::string message) {
+
 	std::chrono::high_resolution_clock::time_point current;
 	current = std::chrono::high_resolution_clock::now();
 
@@ -81,12 +72,16 @@ void LogFile::error(std::string tag, std::string message) {
 	line << "ERROR; " << "+" << duration << " microseconds; " << tag << "; " << message << ";\n";
 	log_string = line.str();
 
+	mutex_lock.lock(); // lock mutex to prevent other threads from messing with file
+
 	log_file.open("log.txt", std::ios_base::app);
 	log_file << log_string;
+	log_file.close();
 
 	if(displayFlag) {
 		std::cout << log_string;
 		std::flush(std::cout);
 	}
-	//std::time_t now_c = std::chrono::system_clock::to_time_t(time_point);
+	
+	mutex_lock.unlock();
 }

@@ -1,1 +1,2 @@
-compile with: g++-4.9 -Wall -pedantic -pthread -o threading threading.cpp log_file.cpp -std=c++0x
+compile with: 
+	g++-4.9 -Wall -pedantic -pthread -o log_test log_test.cpp LogFile.cpp -std=c++0x

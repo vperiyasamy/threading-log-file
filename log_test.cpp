@@ -1,23 +1,17 @@
-#include "log_file.h"
+#include "LogFile.h"
 #include <thread>
 
-
-//LogFile logfile(true);
-
 void task(std::string tag) {
+
     for(int i = 0; i < 10; i++) {
-        //logfile.log(tag, std::to_string(i+1));
         LogFile::log(tag, std::to_string(i + 1));
     }
+
 }
 
 int main(int argc, char *argv[]) {
 
-    // std::chrono::high_resolution_clock::time_point program_start;
-    // program_start = LogFile::startLog();
-
     LogFile::startLog(true);
-    //logfile.startLog(true);
 
     std::thread t1(task, "A");
     std::thread t2(task, "B");
