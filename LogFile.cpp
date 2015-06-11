@@ -3,7 +3,7 @@
 #include "LogFile.h"
 
 bool LogFile::displayFlag = false; // to determine if we should print to cout
-std::ostream LogFile::log_file("log.txt", std::ios_base::app); // file object to open log.txt
+std::fstream LogFile::log_file("log.txt", std::ios_base::app); // file object to open log.txt
 std::stringstream LogFile::line; // string stream to capture info
 std::string LogFile::log_string; // to be written to file/cout
 std::chrono::high_resolution_clock::time_point LogFile::program_start; //used as reference for microsecond execution
