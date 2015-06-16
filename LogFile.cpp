@@ -30,8 +30,9 @@ void LogFile::startLog(bool displayOn) {
 	line << "Program started: " << date_stamp << "\n";
 	std::string log_string = line.str();
 
-	log_file.open("log.txt", std::ios_base::trunc);
-	//log_file.open("log.txt", std::ios_base::app);
+	std::ofstream("log.txt", std::ios::out).close();
+	//log_file.open("log.txt", std::ios_base::trunc);
+	log_file.open("log.txt", std::ios_base::app);
 	log_file << log_string;
 	log_file.close();
 
