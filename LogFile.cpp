@@ -4,10 +4,12 @@
 
 bool LogFile::displayFlag = false; // to determine if we should print to cout
 std::fstream LogFile::log_file("log.txt", std::ios_base::app); // file object to open log.txt
-std::stringstream LogFile::line; // string stream to capture info
-std::string LogFile::log_string; // to be written to file/cout
+// std::stringstream LogFile::line; // string stream to capture info
+// std::string LogFile::log_string; // to be written to file/cout
 std::chrono::high_resolution_clock::time_point LogFile::program_start; //used as reference for microsecond execution
 std::mutex LogFile::mutex_lock; // to prevent multithreading file i/o error
+// std::stringstream LogFile::buffer; // buffer to write to file
+// int LogFile::write_count; // count to write to file every 10 times
 
 // This method only called once to set up logging
 void LogFile::startLog(bool displayOn) {
@@ -24,10 +26,11 @@ void LogFile::startLog(bool displayOn) {
 	const char *date = ctime(&tt);
 	std::string date_stamp(date);
 
+	std::stringstream line;
 	line << "Program started: " << date_stamp << "\n";
-	log_string = line.str();
+	std::string log_string = line.str();
 
-	log_file.open("log.txt", std::fstream::out | std::fstream::trunc);
+	log_file.open("log.txt", std::fstream::trunc);
 	//log_file.open("log.txt", std::ios_base::app);
 	log_file << log_string;
 	log_file.close();
@@ -45,8 +48,9 @@ void LogFile::log(std::string tag, std::string message) {
 
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(current - program_start).count();
 
+	std::stringstream line;
 	line << "LOG; " << "+" << duration << " microseconds; " << tag << "; " << message << ";\n";
-	log_string = line.str();
+	std::string log_string = line.str();
 
 	mutex_lock.lock(); // lock mutex to prevent other threads from messing with file
 
@@ -70,8 +74,9 @@ void LogFile::error(std::string tag, std::string message) {
 
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(current - program_start).count();
 
+	std::stringstream line;
 	line << "ERROR; " << "+" << duration << " microseconds; " << tag << "; " << message << ";\n";
-	log_string = line.str();
+	std::string log_string = line.str();
 
 	mutex_lock.lock(); // lock mutex to prevent other threads from messing with file
 
@@ -86,3 +91,10 @@ void LogFile::error(std::string tag, std::string message) {
 	
 	mutex_lock.unlock();
 }
+
+// void LogFile::writeToFile() {
+
+// 	write_count = 0;
+// 	std::string buffer_string = buffer.str();
+
+// }
