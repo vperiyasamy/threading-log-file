@@ -4,14 +4,10 @@
 
 bool LogFile::displayFlag = false; // to determine if we should print to cout
 std::fstream LogFile::log_file("log.txt", std::ios_base::app); // file object to open log.txt
-// std::stringstream LogFile::line; // string stream to capture info
-// std::string LogFile::log_string; // to be written to file/cout
 std::chrono::high_resolution_clock::time_point LogFile::program_start; //used as reference for microsecond execution
 std::mutex LogFile::mutex_lock; // to prevent multithreading file i/o error
-// std::stringstream LogFile::buffer; // buffer to write to file
-// int LogFile::write_count; // count to write to file every 10 times
 
-// This method only called once to set up logging
+// This method only called once to set up logging, pass bool to set display flag
 void LogFile::startLog(bool displayOn) {
 
 	std::chrono::system_clock::time_point start_time; // start used to print time stamp
@@ -31,8 +27,6 @@ void LogFile::startLog(bool displayOn) {
 	std::string log_string = line.str();
 
 	std::ofstream("log.txt", std::ios::out).close();
-	//log_file.open("log.txt", std::ios_base::trunc);
-	//log_file.open("log.txt", std::ios_base::app);
 	log_file.open("log.txt");
 	log_file << log_string;
 	log_file.close();
@@ -93,10 +87,3 @@ void LogFile::error(std::string tag, std::string message) {
 	
 	mutex_lock.unlock();
 }
-
-// void LogFile::writeToFile() {
-
-// 	write_count = 0;
-// 	std::string buffer_string = buffer.str();
-
-// }

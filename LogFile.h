@@ -1,3 +1,4 @@
+// LogFile.h
 
 #ifndef LogFile_H
 #define LogFile_H
@@ -14,8 +15,6 @@
 class LogFile {
 public:
 	static std::fstream log_file;
-	// static std::stringstream line;
-	// static std::string log_string;
 	static std::chrono::high_resolution_clock::time_point program_start;
 
 	static void log(std::string tag, std::string message);

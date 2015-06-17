@@ -3,7 +3,7 @@
 
 void task(std::string tag) {
 
-    for(int i = 0; i < 5; i++) {
+    for(int i = 0; i < 100; i++) {
         LogFile::log(tag, std::to_string(i + 1));
     }
 
@@ -11,7 +11,7 @@ void task(std::string tag) {
 
 int main(int argc, char *argv[]) {
 
-    LogFile::startLog(true);
+    LogFile::startLog(false);
 
     std::thread t1(task, "A");
     std::thread t2(task, "B");
